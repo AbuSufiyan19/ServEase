@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:layout_marginBottom="70dp"
+    tools:context=".SP_Service_Home_Fragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey">
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome Service Provider"
+            android:background="@color/white"
+            android:textSize="20sp"
+            android:textColor="@color/blue1"
+            android:fontFamily="@font/poppins_thin"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"/>
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:padding="7dp"
+            android:id="@+id/available"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_below="@id/welcome"
+            android:layout_centerHorizontal="true">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/locationlogo"
+                android:src="@drawable/location">
+
+            </ImageView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/locationlogo"
+                android:id="@+id/location"
+                android:layout_marginTop="2dp"
+                android:textSize="17dp"
+                android:layout_marginRight="10dp"
+                android:text="Locate me">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/availability"
+                android:layout_toRightOf="@id/location"
+                android:layout_marginTop="2dp"
+                android:textSize="17dp"
+                android:layout_marginRight="10dp"
+                android:text="Update Availability"
+                android:layout_marginLeft="15dp">
+
+            </TextView>
+            <Switch
+                android:layout_width="wrap_content"
+                android:id="@+id/availabilityswitch"
+                android:layout_toRightOf="@id/availability"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp">
+            </Switch>
+
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/RecyclerView"
+            android:layout_below="@id/available"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="20dp"
+            android:layout_above="@id/conditionsText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/conditionsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="3dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/con"
+                android:layout_height="wrap_content"
+                android:text="Conditions Apply:"
+                android:textSize="20dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:fontFamily="@font/poppins_thin"
+                android:textColor="@color/blue1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:background="@color/grey"
+                android:fontFamily="@font/poppins_light"
+                android:textAlignment="gravity"
+                android:gravity="fill_horizontal"
+                android:text="The Services listed above are booked by the customers, accept or reject the service and do complete it on time for better ratings for your profile."
+                android:textColor="@color/black">
+            </TextView>
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

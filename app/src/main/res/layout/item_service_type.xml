@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    android:padding="10dp"
+    app:cardCornerRadius="5dp"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@color/white">
+
+
+        <TextView
+            android:id="@+id/servicetypename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="@font/sf_pro_display"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="9dp"
+            android:text="Power Saver AC Service"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratt"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/servicetypename"
+            >
+
+            <TextView
+                android:id="@+id/ratings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-5dp"
+                android:textColor="@color/grey2"
+                android:layout_marginLeft="-5dp"
+                android:layout_toRightOf="@id/imageView2"
+                android:text="4.85 (1M bookings)" />
+
+            <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="22dp"
+            android:layout_height="14dp"
+            android:src="@android:drawable/btn_star" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="230dp"
+            android:fontFamily="@font/poppins_light"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ratt"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginLeft="13dp"
+            android:textAlignment="gravity"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="4dp"
+            android:text="description"
+            android:textColor="@color/lavender4"
+            android:textSize="15sp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="31dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/price1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="0dp"
+                android:text="INR "
+                android:textColor="@color/red"
+                android:fontFamily="@font/poppins_light"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@id/price1"
+                android:fontFamily="@font/poppins_light"
+                android:text="499"
+                android:textColor="@color/red"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/addtocart"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/servicetypename"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/sf_pro_display"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/description"
+            android:backgroundTint="@color/black"
+            android:text="Add"
+            android:textColor="@color/white" />
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

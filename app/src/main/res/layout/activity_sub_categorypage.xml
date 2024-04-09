@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".SubCategorypage"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:paddingTop="15dp"
+            android:background="@color/white"
+            android:id="@+id/topbar">
+
+            <TextView
+                android:id="@+id/catname"
+                android:fontFamily="@font/sf_pro_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/blue1"
+                android:text="Category"
+                android:textSize="25dp">
+
+            </TextView>
+
+            <ImageView
+                android:id="@+id/cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/cart">
+
+            </ImageView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/second"
+            android:layout_below="@id/topbar">
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="410dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/searchbox_bg"
+                android:iconifiedByDefault="false"
+                android:queryHint="Search Here"
+                android:searchHintIcon="@color/black"
+                android:theme="@style/ThemeOverlay.Material3.Search" />
+
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/subCategoryRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/second"
+            android:layout_marginTop="2dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="584dp"
+            android:layout_below="@id/subCategoryRecyclerView"
+            android:src="@drawable/servicepolicies">
+
+        </ImageView>
+
+    </RelativeLayout>
+</ScrollView>
