@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="60dp"
+    android:background="@color/white"
+    tools:context=".UserHomeFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+<RelativeLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:id="@+id/topbar"
+    android:background="@color/white">
+
+
+    <ImageView
+        android:id="@+id/locationimg"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="11dp"
+        android:background="@color/white"
+        android:src="@drawable/location">
+
+    </ImageView>
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/locationimg"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="2dp"
+        android:paddingTop="7dp"
+        android:text="Locate Me"
+        android:textColor="@android:color/black"
+        android:textSize="15dp"
+        android:fontFamily="@font/sf_pro_display"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cart"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="13dp"
+        android:layout_marginRight="20dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/cart" />
+
+</RelativeLayout>
+    <SearchView
+    android:id="@+id/searchView"
+    android:layout_width="410dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_below="@id/topbar"
+    android:iconifiedByDefault="false"
+    android:theme="@style/ThemeOverlay.Material3.Search"
+    android:layout_marginRight="15dp"
+    android:layout_marginLeft="15dp"
+    android:background="@drawable/searchbox_bg"
+    android:queryHint="Search Services"
+    android:searchHintIcon="@color/black"
+        android:fontFamily="@font/poppins"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="414dp"
+        android:id="@+id/card"
+        android:layout_height="209dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@id/searchView"
+        app:cardCornerRadius="15dp">
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="414dp"
+        android:layout_height="209dp"
+        android:autoStart="true"
+        android:flipInterval="2000"
+        android:layout_below="@id/searchView"
+        android:inAnimation="@android:anim/slide_in_left"
+        android:outAnimation="@android:anim/slide_out_right"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-3dp"
+        >
+
+        <ImageView
+            android:id="@+id/imageV1"
+            android:layout_width="wrap_content"
+            android:layout_height="207dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/homeservice" />
+
+        <ImageView
+            android:id="@+id/imageV2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/cleaning" />
+        <ImageView
+            android:id="@+id/imageV3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/electricals" />
+        <ImageView
+            android:id="@+id/imageV4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/electronics" />
+        <ImageView
+            android:id="@+id/imageV5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ac" />
+        <ImageView
+            android:id="@+id/imageV6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/painting" />
+        <ImageView
+            android:id="@+id/imageV7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/plumbing" />
+        <ImageView
+            android:id="@+id/imageV8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/carpenter" />
+    </ViewFlipper>
+    </androidx.cardview.widget.CardView>
+
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_below="@id/card"
+    android:clipToPadding="false"
+    android:scrollbars="vertical" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="414dp"
+        android:id="@+id/card2"
+        android:layout_height="209dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@id/recyclerView"
+        app:cardCornerRadius="15dp">
+    <ViewFlipper
+        android:id="@+id/viewFlipper2"
+        android:layout_width="414dp"
+        android:layout_height="209dp"
+        android:autoStart="true"
+        android:flipInterval="2000"
+        android:inAnimation="@android:anim/slide_in_left"
+        android:outAnimation="@android:anim/slide_out_right"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-3dp"
+        >
+
+        <ImageView
+            android:id="@+id/ad3"
+            android:layout_width="wrap_content"
+            android:layout_height="207dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ad3" />
+
+        <ImageView
+            android:id="@+id/ad1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ad1" />
+        <ImageView
+            android:id="@+id/ad2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ad2" />
+
+    </ViewFlipper>
+</androidx.cardview.widget.CardView>
+    <ViewFlipper
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/card2"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="107dp"
+            android:src="@drawable/refer">
+
+        </ImageView>
+    </ViewFlipper>
+
+</RelativeLayout>
+</FrameLayout>
+</ScrollView>
+

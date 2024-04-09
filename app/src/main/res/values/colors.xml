@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="lavender5">#4b1c71</color>
+    <color name="lavender4">#7f4ca5</color>
+    <color name="lavender3">#b57edc</color>
+    <color name="red">#EE2A2A</color>
+    <color name="blue1">#4F74FF</color>
+    <color name="grey0">#F8F8F8</color>
+    <color name="grey">#F2F2F2</color>
+    <color name="grey1">#e2e2e2</color>
+    <color name="grey2">#808080</color>
+
+
+</resources>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChooseServiceProvider"
+    android:background="@color/grey">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:id="@+id/topbar"
+        android:paddingTop="15dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/choose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/blue1"
+            android:text="Choose Service Provider"
+            android:textSize="25dp"
+            android:fontFamily="@font/sf_pro_display">
+
+        </TextView>
+    </RelativeLayout>
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topbar"
+        android:layout_above="@id/bottombar"
+        android:dividerHeight="1.5dp"
+        android:divider="@color/white"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/bottombar"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:id="@+id/checkout"
+            android:layout_height="wrap_content"
+            android:text="CheckOut"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/sf_pro_display"
+            android:background="@drawable/background_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="20dp">
+        </Button>
+
+    </RelativeLayout>
+
+</RelativeLayout>

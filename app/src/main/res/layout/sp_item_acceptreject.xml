@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:background="@color/white">
+
+    <TextView
+        android:id="@+id/customerNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:fontFamily="@font/poppins_thin"
+        android:text="Customer Name"/>
+
+    <TextView
+        android:id="@+id/servicesBookedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/customerNameTextView"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_light"
+        android:text="Services Booked"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@id/servicesBookedTextView"
+        >
+    <Button
+        android:id="@+id/acceptButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/sf_pro_display"
+        android:background="@drawable/background_button"
+        android:textColor="@color/white"
+        android:text="Accept"/>
+
+    <Button
+        android:id="@+id/rejectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/background_button"
+        android:fontFamily="@font/sf_pro_display"
+        android:textColor="@color/white"
+        android:text="Reject"/>
+    </LinearLayout>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

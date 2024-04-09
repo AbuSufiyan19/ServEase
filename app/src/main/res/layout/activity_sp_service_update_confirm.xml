@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SP_ServiceUpdate_Confirm"
+    android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:paddingTop="15dp"
+        android:background="@color/white"
+        android:id="@+id/topbar">
+
+        <TextView
+            android:id="@+id/catname"
+            android:fontFamily="@font/sf_pro_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/blue1"
+            android:text="Category"
+            android:textSize="25dp">
+
+        </TextView>
+    </RelativeLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topbar"
+        android:layout_above="@id/conditionsText"
+        android:id="@+id/listView">
+    </ListView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/conditionsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/confirmButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="3dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Conditions Apply:"
+            android:textSize="20dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:fontFamily="@font/poppins_thin"
+            android:textColor="@color/blue1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@color/grey"
+            android:fontFamily="@font/poppins_light"
+            android:textAlignment="gravity"
+            android:gravity="fill_horizontal"
+            android:text="The Services listed above have multiple subcategories, if you choose any one of the services to provide to the customer you have to do all the services under the category."
+            android:textColor="@color/black">
+        </TextView>
+    </LinearLayout>
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_button"
+        android:text="Add Service"
+        android:textColor="@color/white"
+        android:fontFamily="@font/sf_pro_display"
+        android:layout_margin="16dp"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:textAllCaps="true"/>
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_button"
+        android:text="Remove Service"
+        android:textColor="@color/white"
+        android:fontFamily="@font/sf_pro_display"
+        android:layout_margin="16dp"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:textAllCaps="true"/>
+
+</RelativeLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imageviewCategory"
+        android:layout_width="110dp"
+        android:layout_margin="10dp"
+        android:layout_centerVertical="true"
+        android:layout_height="90dp">
+
+    </ImageView>
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/textViewServicesBooked"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="13dp"
+        android:gravity="end"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/poppins_thin"
+        android:textSize="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/imageviewCategory"
+        android:text="Services Booked" />
+    <TextView
+    android:textColor="@color/black"
+    android:id="@+id/datetime"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="13dp"
+    android:gravity="end"
+    android:layout_marginLeft="20dp"
+    android:fontFamily="@font/poppins_thin"
+    android:textSize="15dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_below="@id/textViewServicesBooked"
+    android:layout_toRightOf="@id/imageviewCategory"
+    android:text="Date Time" />
+
+
+    <!-- TextView for Services Booked -->
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:textColor="@color/grey2"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_light"
+        android:layout_below="@id/datetime"
+        android:layout_alignParentRight="true"
+        android:textSize="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="Status" />
+
+</RelativeLayout>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckOutPage"
+    android:background="@color/grey">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:id="@+id/topbar"
+        android:paddingTop="15dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="45dp"
+            android:textColor="@color/blue1"
+            android:text="CheckOut"
+            android:textSize="25dp"
+            android:fontFamily="@font/sf_pro_display"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold">
+
+        </TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/middle"
+        android:layout_below="@id/topbar"
+        android:layout_above="@id/bottombar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="25dp"
+            android:padding="20dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Customer Name"
+                android:textColor="@color/blue1"
+                android:textSize="15dp"></TextView>
+
+            <TextView
+                android:id="@+id/customername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer Name"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Mobile Number"
+                android:textColor="@color/blue1"
+                android:textSize="15dp"></TextView>
+
+            <TextView
+                android:id="@+id/mobileno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile Number"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Address"
+                android:textColor="@color/blue1"
+                android:textSize="15dp"></TextView>
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Category Name"
+                android:textColor="@color/blue1"
+                android:textSize="15dp"></TextView>
+
+            <TextView
+                android:id="@+id/categoryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category Name"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Services Booked"
+                android:textColor="@color/blue1"
+                android:textSize="15dp"></TextView>
+
+            <TextView
+                android:id="@+id/services"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Services Booked"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Service Provider Name"
+                android:textColor="@color/blue1"
+                android:textSize="15dp"></TextView>
+
+            <TextView
+                android:id="@+id/serviceprovidername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Service Provider Name"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Contact(Provider)"
+                android:textColor="@color/blue1"
+                android:textSize="15dp"></TextView>
+
+            <TextView
+                android:id="@+id/serviceproviderphoneno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact(Provider)"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Total Amount"
+                android:textColor="@color/blue1"
+                android:textSize="15dp"></TextView>
+
+            <TextView
+                android:id="@+id/totalamount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Amount"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/bottombar"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+
+
+        <Button
+            android:id="@+id/booknow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/sf_pro_display"
+            android:background="@drawable/background_button"
+            android:text="Book Now"
+            android:textColor="@color/white"></Button>
+
+    </RelativeLayout>
+
+    </RelativeLayout>
