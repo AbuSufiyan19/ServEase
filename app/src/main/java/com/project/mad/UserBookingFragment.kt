@@ -1,8 +1,7 @@
 package com.project.mad
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +13,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.squareup.picasso.Picasso
 
 class UserBookingFragment : Fragment() {
     private lateinit var listViewBookings: ListView
     private lateinit var bookingsAdapter: BookingAdapter
     private lateinit var databaseReference: DatabaseReference
     private lateinit var searchView: SearchView
+
+    private lateinit var bookingId: String
+    private lateinit var serviceProviderPhoneNumber: String
 
     private var originalBookingsList: MutableList<Booking> = mutableListOf()
 
@@ -34,6 +35,18 @@ class UserBookingFragment : Fragment() {
         searchView = view.findViewById(R.id.searchView)
         fetchUserBookings(getUserIdFromSharedPreferences())
         setupSearchView()
+
+        listViewBookings.setOnItemClickListener { _, _, position, _ ->
+            val booking = bookingsAdapter.getItem(position)
+            booking?.let {
+                // Start the tracking activity with necessary data
+                val intent = Intent(requireContext(), User_Tracking_Activity::class.java)
+                intent.putExtra("bookingId", booking.bookingId) // Pass bookingId
+                intent.putExtra("serviceProviderPhoneNumber", booking.serviceProviderPhoneNumber) // Pass serviceProviderPhoneNumber
+                startActivity(intent)
+            }
+        }
+
         return view
     }
 
@@ -51,15 +64,20 @@ class UserBookingFragment : Fragment() {
                 originalBookingsList.clear()
                 for (bookingSnapshot in dataSnapshot.children) {
                     val customerId = bookingSnapshot.child("customerId").getValue(String::class.java)
+                    bookingId = bookingSnapshot.child("bookingId").getValue(String::class.java).toString()
+                    serviceProviderPhoneNumber = bookingSnapshot.child("serviceProviderPhoneNumber").getValue(String::class.java).toString()
+
                     val servicesBooked = mutableListOf<String>()
                     for (serviceSnapshot in bookingSnapshot.child("servicesBooked").children) {
                         val service = serviceSnapshot.getValue(String::class.java) ?: ""
                         servicesBooked.add(service)
                     }
                     val categoryName = bookingSnapshot.child("categoryName").getValue(String::class.java)
+                    val status = bookingSnapshot.child("status").getValue(String::class.java)
+
                     val bookingDateTime = bookingSnapshot.child("bookingDateTime").getValue(String::class.java)
                     if (customerId != null && servicesBooked.isNotEmpty() && customerId == userId) {
-                        fetchCategoryImage(categoryName, servicesBooked, bookingDateTime)
+                        fetchCategoryImage(categoryName, servicesBooked, bookingDateTime,status,bookingId,serviceProviderPhoneNumber)
                     }
                 }
             }
@@ -70,7 +88,14 @@ class UserBookingFragment : Fragment() {
         })
     }
 
-    private fun fetchCategoryImage(categoryName: String?, servicesBooked: List<String>, bookingDateTime: String?) {
+    private fun fetchCategoryImage(
+        categoryName: String?,
+        servicesBooked: List<String>,
+        bookingDateTime: String?,
+        status: String?,
+        bookingId: String,
+        serviceProviderPhoneNumber: String
+    ) {
         if (categoryName != null) {
             val categoryRef = FirebaseDatabase.getInstance().getReference("categories")
             val query = categoryRef.orderByChild("categoryName").equalTo(categoryName)
@@ -84,7 +109,11 @@ class UserBookingFragment : Fragment() {
                                 servicesBooked,
                                 bookingDateTime,
                                 categoryName,
-                                imageUrl
+                                imageUrl,
+                                status,
+                                bookingId,
+                                serviceProviderPhoneNumber
+
                             )
                             originalBookingsList.add(booking)
                         }
@@ -129,6 +158,10 @@ class UserBookingFragment : Fragment() {
         val servicesBooked: List<String>,
         val bookingDateTime: String?,
         val categoryName: String?,
-        val imageUrl: String?
+        val imageUrl: String?,
+        val status: String?,
+        val bookingId: String?,
+        val serviceProviderPhoneNumber: String?
     )
+
 }

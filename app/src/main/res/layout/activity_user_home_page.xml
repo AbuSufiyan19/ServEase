@@ -30,6 +30,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:itemActiveIndicatorStyle="@color/blue1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:itemTextColor="@color/blue1"/>
+        app:itemTextColor="@color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,11 +20,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:layout_marginBottom="0dp"
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@id/cart"
             android:layout_marginRight="20dp"
+            android:textStyle="bold"
             android:fontFamily="@font/sf_pro_display"
             android:text="ServiceType"
             android:textColor="@color/blue1"
@@ -43,6 +44,20 @@
             android:src="@drawable/cart">
 
         </ImageView>
+
+        <TextView
+            android:id="@+id/cartcount"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/poppins_thin"
+            android:text=""
+            android:textColor="@color/red"
+            android:textSize="13dp"
+            android:textStyle="bold"></TextView>
     </RelativeLayout>
 
     <ViewFlipper

@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:id="@+id/scrollView"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:id="@+id/topbar">
+
+            <TextView
+                android:id="@+id/tracking"
+                android:fontFamily="@font/sf_pro_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/blue1"
+                android:text="Tracking"
+                android:textStyle="bold"
+                android:textSize="30dp">
+
+            </TextView>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/topbar"
+            android:id="@+id/order">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:fontFamily="@font/poppins_light"
+                android:layout_marginTop="8dp"
+                android:text="Booking ID : "
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/orderid"
+                android:layout_marginStart="3dp"
+                android:fontFamily="@font/poppins_light"
+                android:layout_marginTop="8dp"
+                android:text="Order Id"
+                android:textColor="@color/blue1"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cus"
+            android:layout_below="@id/order"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Customer : "
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/sp_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="2dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="Name"
+                android:textColor="@color/blue1"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+
+
+
+            <ImageView
+                android:id="@+id/call"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:src="@drawable/call"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="6dp"/>
+
+            <TextView
+                android:id="@+id/callphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="6dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_thin"
+                android:textColor="@color/grey2"
+                android:text="Call"
+               />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cus"
+            android:layout_marginTop="20dp"
+            android:id="@+id/track"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/default_point0"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="40dp"
+                    android:src="@drawable/bg_circle_done"
+                    />
+
+                <TextView
+                    android:id="@+id/acc_rej0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Service Booked"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-9.7dp"
+                android:orientation="horizontal">
+
+
+                <ProgressBar
+                    android:id="@+id/prg0"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="92dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="4dp"
+                    android:progress="100"
+                    android:progressTint="@color/blue1"
+                    android:rotation="90"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:id="@+id/datetime0"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="-------------"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/default_point1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="40dp"
+                    android:src="@drawable/bg_circle_default"
+                    />
+
+                <TextView
+                    android:id="@+id/acc_rej"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="Service accept/reject"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-9.7dp"
+                android:orientation="horizontal">
+
+
+                <ProgressBar
+                    android:id="@+id/prg1"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="92dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="4dp"
+                    android:progress="100"
+                    android:progressTint="@color/grey"
+                    android:rotation="90"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:id="@+id/datetime1"
+                    android:text="-------------"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/default_point2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="40dp"
+                    android:src="@drawable/bg_circle_default"
+                    />
+
+                <TextView
+                    android:id="@+id/sp_arrive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="Will Arrive Soon"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-9.7dp"
+                android:orientation="horizontal">
+
+
+                <ProgressBar
+                    android:id="@+id/prg2"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="92dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="4dp"
+                    android:progress="100"
+                    android:progressTint="@color/grey"
+                    android:rotation="90"
+                    />
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/datetime2"
+                    android:fontFamily="@font/poppins_light"
+                    android:paddingTop="10dp"
+                    android:text="-------------"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/default_point3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="40dp"
+                    android:src="@drawable/bg_circle_default"
+                    />
+
+                <TextView
+                    android:id="@+id/work_started"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="To be Started Soon"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    />
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-9.7dp"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/prg3"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="92dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="4dp"
+                    android:progress="100"
+                    android:progressTint="@color/grey"
+                    android:rotation="90"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/datetime3"
+                    android:fontFamily="@font/poppins_light"
+                    android:paddingTop="10dp"
+                    android:text="-------------"/>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/default_point4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="40dp"
+                    android:src="@drawable/bg_circle_default"
+                    />
+
+
+                <TextView
+                    android:id="@+id/work_finished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Not yet Completed"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-9.7dp"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/prg4"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="92dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="4dp"
+                    android:progress="100"
+                    android:progressTint="@color/grey"
+                    android:rotation="90"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/datetime4"
+                    android:fontFamily="@font/poppins_light"
+                    android:paddingTop="10dp"
+                    android:text="-------------"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/default_point5"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="40dp"
+                    android:src="@drawable/bg_circle_default"
+                    />
+
+
+                <TextView
+                    android:id="@+id/payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="To be Paid"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="92dp"
+                    android:id="@+id/datetime5"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="-------------"/>
+
+                <Button
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonpayment"
+                    android:text="Payment Done"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/sf_pro_display"
+                    android:textColor="@color/white"
+                    android:background="@drawable/background_button">
+
+                </Button>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:gravity="center"
+            android:layout_below="@id/track">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttoncancel"
+                android:text="Cancel Service"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/sf_pro_display"
+                android:textColor="@color/white"
+                android:background="@drawable/background_button">
+
+            </Button>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/ratings"
+                android:layout_height="wrap_content"
+                android:text="Reviews &amp; Ratings"
+                android:gravity="center"
+                android:fontFamily="@font/poppins_thin"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:textAlignment="center"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/already"
+                    android:layout_height="wrap_content"
+                    android:text="If you have any grievences?"
+                    android:textColor="#3a3a3a"
+                    android:fontFamily="@font/poppins_light"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="32dp"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/query"
+                    android:layout_toRightOf="@id/already"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Click Here"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="#1F75FE"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="32dp"
+                    android:paddingLeft="5dp"
+                    ></TextView>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+   tools:context=".Ratings">
+
+    <TextView
+        android:id="@+id/ratings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/poppins_thin"
+        android:layout_marginTop="20dp"
+        android:text="Ratings"
+        android:textColor="@color/red"
+        android:textSize="23sp"
+        android:textStyle="bold" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="10dp"
+        android:numStars="5"
+        android:progressTint="@color/blue1"
+        android:rating="0"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:stepSize="1" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/review"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_thin"
+        android:text="Review"
+        android:textColor="@color/red"
+        android:textSize="23sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/optional"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_thin"
+        android:text="(Optional)"
+        android:textColor="@color/grey1"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/reviewEditText"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="35dp"
+        android:fontFamily="@font/poppins_light"
+        android:background="@drawable/edittext_bg"
+        android:gravity="start"
+        android:hint="Enter your review here (max 150 words)"
+        android:inputType="textMultiLine"
+        android:maxLength="150"
+        android:maxLines="7"
+        android:textColor="@color/black"
+        android:minLines="0"
+        android:padding="4dp" />
+
+    <Button
+        android:id="@+id/submitReviewButton"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/sf_pro_display"
+        android:textColor="@color/white"
+        android:background="@drawable/background_button"
+        android:text="Submit" />
+
+</LinearLayout>

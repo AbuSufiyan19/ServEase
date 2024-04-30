@@ -2,9 +2,10 @@ package com.project.mad
 
 import ServiceTypeAdapter
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -18,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
-class DescriptionPage : AppCompatActivity() {
+class DescriptionPage : AppCompatActivity(),ServiceTypeAdapter.CartCountListener  {
 
     private lateinit var databaseReference: DatabaseReference
     private lateinit var recyclerView: RecyclerView
@@ -52,6 +53,43 @@ class DescriptionPage : AppCompatActivity() {
             subcategory.text = subcategoryName
             fetchAllServiceTypeData(subcategoryName)
         }
+       cartCountfn()
+
+    }
+    override fun onCartCountUpdated() {
+        // Implement the logic to update the cart count here
+        cartCountfn()
+    }
+
+    private fun cartCountfn() {
+        val cartcount = findViewById<TextView>(R.id.cartcount)
+        val cartReference = FirebaseDatabase.getInstance().getReference("cart")
+
+        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("userToken", null)
+// Construct a query to find the child nodes with matching userId
+        val query = cartReference.orderByChild("userId").equalTo(userId)
+
+// Execute the query
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var count = 0
+                for (cartSnapshot in snapshot.children) {
+                    count++
+                }
+                // Assign the count to the TextView
+                cartcount.text = count.toString()
+                if (count == 0) {
+                    cartcount.visibility = View.GONE
+                } else {
+                    cartcount.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle any errors
+            }
+        })
     }
 
     private fun fetchAllServiceTypeData(subcategoryName: String) {
@@ -98,7 +136,7 @@ class DescriptionPage : AppCompatActivity() {
                         .into(imagetop)
                 }
 
-                val adapter = ServiceTypeAdapter(serviceTypeData)
+                val adapter = ServiceTypeAdapter(serviceTypeData, this@DescriptionPage)
                 recyclerView.adapter = adapter
             }
 

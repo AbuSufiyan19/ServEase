@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener
 class cartpage : AppCompatActivity() {
     private lateinit var databaseReference: DatabaseReference
     private lateinit var recyclerView: RecyclerView
+    private lateinit var deleteAllButton: ImageView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +50,7 @@ class cartpage : AppCompatActivity() {
             alertDialog.show()
         }
 
-        val deleteAllButton = findViewById<ImageView>(R.id.deleteall)
+        deleteAllButton = findViewById(R.id.deleteall)
         deleteAllButton.setOnClickListener {
             displayDeleteConfirmationDialog(this)
         }
@@ -201,11 +202,14 @@ class cartpage : AppCompatActivity() {
                         tot.visibility = View.GONE
                         summary.visibility = View.GONE
                         totalpc.visibility = View.GONE
+                        deleteAllButton.visibility = View.GONE
                     } else {
                         chooseserviceprovider.visibility = View.VISIBLE
                         tot.visibility = View.VISIBLE
                         summary.visibility = View.VISIBLE
                         totalpc.visibility = View.VISIBLE
+                        deleteAllButton.visibility = View.VISIBLE
+
                     }
                 }
 

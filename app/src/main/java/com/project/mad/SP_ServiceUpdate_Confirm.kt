@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.res.ResourcesCompat
 import com.google.firebase.database.*
 
 
@@ -232,7 +233,7 @@ class SP_ServiceUpdate_Confirm : AppCompatActivity() {
                         val subCategoryNameTextView = view?.findViewById<TextView>(R.id.subCategoryNameTextView)
                         subCategoryNameTextView?.text = getItem(position)
                         subCategoryNameTextView?.setTextColor(Color.parseColor("#00308f")) // Set text color to black
-
+                        subCategoryNameTextView?.setTypeface(ResourcesCompat.getFont(context, R.font.poppins_light))
                         // Set background color to blue
                         view?.setBackgroundColor(Color.parseColor("#F0F8FF"))
 

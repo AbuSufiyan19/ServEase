@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -40,17 +41,54 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun checkDatabaseWithToken(userEmail: String) {
         val email = userEmail
         val databaseReference = FirebaseDatabase.getInstance().reference.child("serviceMan")
 
-        databaseReference.orderByChild("email").equalTo(userEmail)
+        databaseReference.orderByChild("email").equalTo(email)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
-                        // Email exists in the serviceMan collection
-                        navigateToServiceManServiceSelection()
+                        for (data in snapshot.children) {
+                            val approvalStatus = data.child("approvalstatus").getValue(String::class.java)
+                            if (approvalStatus == "Approved") {
+                                // Email exists in the serviceMan collection and approved
+                                navigateToServiceManHomePageActivity()
+                                return // Exit loop if approved
+                            }
+                            else if (approvalStatus == "Deactivate") {
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "You Account is Blocked. Contact Admin",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                navigateToLoginPage()
+                                return
+                            }
+                            else if (approvalStatus == "Proof Uploaded") {
+                                Snackbar.make(
+                                    findViewById(android.R.id.content),
+                                    "Your Document will be verified within 3 to 4 hours until then wait patiently",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                                navigateToLoginPage()
+                                return
+                            }
+                            else{
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    " You need to upload your Document",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                navigateToLoginPage()
+                                return
+                            }
+                        }
+                        // If loop completes without finding approved status
+                        // Handle accordingly, maybe show a message or prevent login
                     } else {
+                        // Service man not found
                         checkUsersDB(email)
                     }
                 }
@@ -62,43 +100,53 @@ class MainActivity : AppCompatActivity() {
                         "Error checking collection: ${error.message}",
                         Toast.LENGTH_SHORT
                     ).show()
-                    // In case of error, navigate to login page or handle as appropriate
                     navigateToLoginPage()
                 }
             })
     }
-private fun checkUsersDB(email: String) {
-    val databaseReference = FirebaseDatabase.getInstance().reference.child("users")
+    private fun checkUsersDB(email: String) {
+        val databaseReference = FirebaseDatabase.getInstance().reference.child("users")
 
-    databaseReference.orderByChild("email").equalTo(email)
-        .addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    // Email exists in the users collection
-                    Toast.makeText(this@MainActivity, "Customer login", Toast.LENGTH_LONG)
-                        .show()
-                    navigateToUserHomePage()
-                } else {
-                    // Email does not exist in the serviceMan collection
-                    Toast.makeText(this@MainActivity, "Not an User", Toast.LENGTH_LONG)
-                        .show()
-                    navigateToLoginPage()
+        databaseReference.orderByChild("email").equalTo(email)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        // Email exists in the users collection
+//                    Toast.makeText(this@MainActivity, "Customer login", Toast.LENGTH_LONG)
+//                        .show()
+                        navigateToUserHomePage()
+                    } else {
+                        // Email does not exist in the serviceMan collection
+                        Toast.makeText(this@MainActivity, "Not an User", Toast.LENGTH_LONG)
+                            .show()
+                        navigateToLoginPage()
+                    }
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                // Handle database error
-                Toast.makeText(
-                    this@MainActivity,
-                    "Error checking collection: ${error.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        })
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle database error
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Error checking collection: ${error.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
 
-}
+    }
 
-    private fun navigateToServiceManServiceSelection() {
+//    private fun navigateToAccountBlocked() {
+//        val intent = Intent(this, SP_Account_Blocked::class.java)
+//        startActivity(intent)
+//        finish() // Close the current activity
+//    }
+
+    private fun navigateToProofPage() {
+        val intent = Intent(this, SP_Proof_Submission::class.java)
+        startActivity(intent)
+        finish() // Close the current activity
+    }
+    private fun navigateToServiceManHomePageActivity() {
         val intent = Intent(this, ServiceManHomePageActivity::class.java)
         startActivity(intent)
         finish() // Close the current activity

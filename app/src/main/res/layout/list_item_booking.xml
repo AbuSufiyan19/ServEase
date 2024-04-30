@@ -6,6 +6,7 @@
         android:id="@+id/imageviewCategory"
         android:layout_width="110dp"
         android:layout_margin="10dp"
+        android:layout_centerVertical="true"
         android:layout_height="90dp">
 
     </ImageView>
@@ -24,6 +25,7 @@
         android:layout_toRightOf="@id/imageviewCategory"
         android:text="Booked Services" />
 
+
     <!-- TextView for Services Booked -->
     <TextView
         android:id="@+id/textViewBookingDateTime"
@@ -35,7 +37,20 @@
         android:layout_alignParentRight="true"
         android:textSize="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:text="Date and Time" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:textColor="@color/blue1"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_light"
+        android:layout_below="@id/textViewBookingDateTime"
+        android:layout_alignParentRight="true"
+        android:textSize="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="4dp"
+        android:text="Status" />
 
 </RelativeLayout>

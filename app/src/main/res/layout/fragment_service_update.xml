@@ -29,12 +29,41 @@
         android:layout_below="@id/choose"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_above="@id/conditionsText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/conditionsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="3dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Conditions apply:"
+            android:textSize="20dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:fontFamily="@font/poppins_thin"
+            android:textColor="@color/blue1" />
 
-
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins_light"
+            android:textAlignment="gravity"
+            android:gravity="fill_horizontal"
+            android:text="The Services listed above have multiple subcategories, if you choose any one of the services to provide to the customer you have to do all the services under the category."
+            android:textColor="@color/black">
+        </TextView>
+    </LinearLayout>
 </RelativeLayout>

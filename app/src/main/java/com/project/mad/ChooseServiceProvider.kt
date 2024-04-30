@@ -4,8 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ListView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
@@ -15,6 +18,8 @@ import kotlin.math.*
 class ChooseServiceProvider : AppCompatActivity() {
 
     private lateinit var listView: ListView
+    private lateinit var noserviceman: TextView
+    private lateinit var checkout: Button
     private lateinit var databaseReference: DatabaseReference
 
     @SuppressLint("MissingInflatedId")
@@ -29,8 +34,10 @@ class ChooseServiceProvider : AppCompatActivity() {
         val categoryName = intent.getStringExtra("categoryName")
         val serviceNames = intent.getStringArrayListExtra("serviceNames")
 
+        noserviceman = findViewById(R.id.noserviceman)
+        noserviceman.visibility = View.GONE
 
-        val checkout = findViewById<Button>(R.id.checkout)
+        checkout = findViewById(R.id.checkout)
 //        checkout.setOnClickListener {
 //            // Define the action to navigate to the homepage
 //            val intent = Intent(this@ChooseServiceProvider, CheckOutPage::class.java).apply {
@@ -63,6 +70,7 @@ class ChooseServiceProvider : AppCompatActivity() {
             } else {
                 // Display a message to the user indicating that no service provider is selected
                 // You can implement this based on your UI/UX requirements
+                Toast.makeText(this, "Please choose a service provider", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -122,14 +130,39 @@ class ChooseServiceProvider : AppCompatActivity() {
                             val distance = calculateDistance(userLatitude, userLongitude, latitude, longitude)
 
                             // Check if distance is within 50 kilometers radius and service man is available
-                            if (categoryName in services && availability == "available" && distance <= 50) {
-                                serviceMenList.add(it)
+                            if (categoryName in services && availability == "Available" && distance <= 50) {
+//                                serviceMenList.add(it)
+                                val rating = snapshot.child("rating").getValue(String::class.java)
+                                serviceMenList.add(it.copy(rating = rating)) // Update the rating field
+
                             }
                         }
                     }
                 }
-                val adapter = ChooseServiceProviderAdapter(this@ChooseServiceProvider, serviceMenList)
-                listView.adapter = adapter
+                if (serviceMenList.isEmpty()) {
+                    // No service providers available
+                    listView.visibility = View.GONE
+                    noserviceman.visibility = View.VISIBLE
+                    checkout.visibility = View.GONE
+                } else {
+                    // Service providers available
+                    listView.visibility = View.VISIBLE
+                    noserviceman.visibility = View.GONE
+                    checkout.visibility = View.VISIBLE
+
+
+                    // Sort serviceMenList based on ratings (assuming ratings are stored as String)
+                    serviceMenList.sortByDescending { it.rating?.toDoubleOrNull() ?: 0.0 }
+
+                    val adapter = ChooseServiceProviderAdapter(this@ChooseServiceProvider, serviceMenList)
+                    listView.adapter = adapter
+                }
+                // Sort serviceMenList based on ratings (assuming ratings are stored as String)
+//                serviceMenList.sortByDescending { it.rating?.toDoubleOrNull() ?: 0.0 }
+//
+//
+//                val adapter = ChooseServiceProviderAdapter(this@ChooseServiceProvider, serviceMenList)
+//                listView.adapter = adapter
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

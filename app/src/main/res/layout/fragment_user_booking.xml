@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="45dp"
-            android:text="My Orders"
+            android:text="My Bookings"
             android:textSize="25dp"
             android:textColor="@color/blue1"
             android:fontFamily="@font/sf_pro_display" />

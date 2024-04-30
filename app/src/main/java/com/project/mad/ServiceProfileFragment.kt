@@ -78,7 +78,7 @@ class ServiceProfileFragment : Fragment() {
                             val email = userData?.email ?: ""
                             val phone = userData?.phoneNumber ?: ""
                             val services = userData?.services ?:""
-//                            val rating = userData?.rating ?:""
+                            val rating = userData?.rating ?:""
                             val latitude = userData?.location?.latitude ?: 0.0
                             val longitude = userData?.location?.longitude ?: 0.0
                             fetchAddressFromLocation(latitude, longitude)
@@ -90,7 +90,8 @@ class ServiceProfileFragment : Fragment() {
                             emailTextView.text = email
                             phoneTextView.text = phone
                             serviceTextView.text = services
-//                            ratingTextView.text = rating
+                            ratingTextView.text = if (rating.toDoubleOrNull() == 0.0) "N/A" else rating
+
 
                         } else {
                             // Handle the case where the provided userId doesn't exist
@@ -112,7 +113,7 @@ class ServiceProfileFragment : Fragment() {
         val services: String = "",
         val location: Location = Location(),
         val address: String = "",
-//        val rating: String
+        val rating: String = ""
     )
     data class Location(
         val latitude: Double = 0.0,

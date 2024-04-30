@@ -16,11 +16,17 @@ import com.google.firebase.database.ValueEventListener
 import com.project.mad.DescriptionPage
 import com.project.mad.R
 
-class ServiceTypeAdapter(private val serviceTypeData: List<DescriptionPage.Quintuple<String, String, String, String, String>>) : RecyclerView.Adapter<ServiceTypeAdapter.ServiceTypeViewHolder>(), Filterable {
+class ServiceTypeAdapter(private val serviceTypeData: List<DescriptionPage.Quintuple<String, String, String, String, String>>
+, private val cartCountListener: CartCountListener
+) : RecyclerView.Adapter<ServiceTypeAdapter.ServiceTypeViewHolder>(), Filterable {
 
     private var filteredData: MutableList<DescriptionPage.Quintuple<String, String, String, String, String>> = serviceTypeData.toMutableList()
     private var originalData: MutableList<DescriptionPage.Quintuple<String, String, String, String, String>> = serviceTypeData.toMutableList()
     private val databaseReference = FirebaseDatabase.getInstance().getReference("cart")
+
+    interface CartCountListener {
+        fun onCartCountUpdated()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceTypeViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_service_type, parent, false)
@@ -72,6 +78,8 @@ class ServiceTypeAdapter(private val serviceTypeData: List<DescriptionPage.Quint
                                 )
                                 databaseReference.push().setValue(cartItem)
                                 Toast.makeText(itemView.context, "Service added to cart", Toast.LENGTH_SHORT).show()
+                                cartCountListener.onCartCountUpdated()
+
                             } else {
                                 // Get the category name from the first item in the cart
                                 val currentCategoryName = userCartItems[0].child("categoryName").getValue(String::class.java)
@@ -98,6 +106,8 @@ class ServiceTypeAdapter(private val serviceTypeData: List<DescriptionPage.Quint
                                         )
                                         databaseReference.push().setValue(cartItem)
                                         Toast.makeText(itemView.context, "Service added to cart", Toast.LENGTH_SHORT).show()
+                                        cartCountListener.onCartCountUpdated()
+
                                     }
                                 } else {
                                     // Category name does not match, display a toast message
@@ -115,6 +125,7 @@ class ServiceTypeAdapter(private val serviceTypeData: List<DescriptionPage.Quint
                             )
                             databaseReference.push().setValue(cartItem)
                             Toast.makeText(itemView.context, "Service added to cart", Toast.LENGTH_SHORT).show()
+                            cartCountListener.onCartCountUpdated()
                         }
                     }
 
@@ -122,6 +133,7 @@ class ServiceTypeAdapter(private val serviceTypeData: List<DescriptionPage.Quint
                         // Handle onCancelled
                     }
                 })
+                cartCountListener.onCartCountUpdated()
             }
         }
 

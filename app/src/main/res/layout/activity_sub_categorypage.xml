@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
 
     <RelativeLayout
         android:id="@+id/main"
@@ -15,8 +16,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:paddingTop="15dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:id="@+id/topbar">
 
@@ -28,6 +28,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/blue1"
+                android:textStyle="bold"
                 android:text="Category"
                 android:textSize="25dp">
 
@@ -44,6 +45,19 @@
                 android:src="@drawable/cart">
 
             </ImageView>
+            <TextView
+                android:id="@+id/cartcount"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/poppins_thin"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="13dp"
+                android:textStyle="bold"></TextView>
         </RelativeLayout>
 
         <RelativeLayout

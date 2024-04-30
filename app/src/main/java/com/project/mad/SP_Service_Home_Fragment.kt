@@ -32,6 +32,8 @@ class SP_Service_Home_Fragment : Fragment() {
     private lateinit var adapter: SP_AcceptReject_Adapter
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationTextView: TextView
+    private lateinit var serviceprovidername: TextView
+
     private lateinit var databaseReference: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var availabilityTextView: TextView // Move the declaration here
@@ -50,7 +52,7 @@ class SP_Service_Home_Fragment : Fragment() {
 
         locationTextView = view.findViewById(R.id.location)
         availabilityTextView = view.findViewById(R.id.availability) // Initialize here
-
+        serviceprovidername = view.findViewById(R.id.spname)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         fetchCurrentLocation()
@@ -63,11 +65,11 @@ class SP_Service_Home_Fragment : Fragment() {
         val availabilitySwitch = view.findViewById<Switch>(R.id.availabilityswitch)
         availabilitySwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                updateavailability("available")
-                availabilityTextView.text = "available"
+                updateavailability("Available")
+                availabilityTextView.text = "Available"
             } else {
-                updateavailability("notavailable")
-                availabilityTextView.text = "unavailable"
+                updateavailability("Notavailable")
+                availabilityTextView.text = "Unavailable"
             }
         }
         return view
@@ -86,10 +88,15 @@ class SP_Service_Home_Fragment : Fragment() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if (dataSnapshot.exists()) {
                         val availability = dataSnapshot.child("availability").getValue(String::class.java)
+                        val spname = dataSnapshot.child("username").getValue(String::class.java)
+                        val hello = "Hello, "
+                        val serviceProviderNameText = hello + spname
+                        serviceprovidername.text = serviceProviderNameText
+
                         // Set the switch to checked state if availability is "available"
-                        availabilitySwitch?.isChecked = availability == "available"
+                        availabilitySwitch?.isChecked = availability == "Available"
                         // Assign "available" to TextView if the switch is checked
-                        availabilityTextView?.text = if (availabilitySwitch?.isChecked == true) "available" else "unavailable"
+                        availabilityTextView?.text = if (availabilitySwitch?.isChecked == true) "Available" else "Unavailable"
 
 
                     } else {
@@ -142,9 +149,20 @@ class SP_Service_Home_Fragment : Fragment() {
                         bookingData.add(bookingTriple)
                     }
                 }
-                adapter = SP_AcceptReject_Adapter(bookingData, requireContext())
-                RecyclerView.adapter = adapter
+                if (bookingData.isEmpty()) {
+                    // If there are no services, hide RecyclerView and show "No Services" TextView
+                    RecyclerView.visibility = View.GONE
+                    view?.findViewById<TextView>(R.id.noservices)?.visibility = View.VISIBLE
 
+                } else {
+                    // If there are services, show RecyclerView and hide "No Services" TextView
+                    RecyclerView.visibility = View.VISIBLE
+                    view?.findViewById<TextView>(R.id.noservices)?.visibility = View.GONE
+
+                    // Update RecyclerView with the fetched data
+                    adapter = SP_AcceptReject_Adapter(bookingData, requireContext())
+                    RecyclerView.adapter = adapter
+                }
 
             }
 
@@ -166,7 +184,7 @@ class SP_Service_Home_Fragment : Fragment() {
                             val addresses: List<Address>? = geocoder.getFromLocation(location.latitude, location.longitude, 1)
                             if (addresses != null && addresses.isNotEmpty()) {
                                 val city = addresses[0].locality ?: ""
-//                                val thoroughfare = addresses[0].thoroughfare ?: ""
+                                val thoroughfare = addresses[0].thoroughfare ?: ""
 
                                 locationTextView.text = city
                                 updateLocationInDatabase(

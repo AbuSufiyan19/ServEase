@@ -45,7 +45,13 @@ class ChooseServiceProviderAdapter(private val context: Context, private val ser
 
         // Check if rating is empty or null, assign "0" if it is
         val rating = if (serviceMan.rating.isNullOrBlank()) "0" else serviceMan.rating
-        viewHolder.ratingTextView.text = rating
+        // Assuming viewHolder is the ViewHolder object where ratingTextView is defined
+        if (rating == "0.0") {
+            viewHolder.ratingTextView.text = "N/A"
+        } else {
+            viewHolder.ratingTextView.text = rating.toString()
+        }
+
 
         // Set background color based on position
         val bgColor = if (position % 2 == 0) R.color.grey1 else R.color.grey

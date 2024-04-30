@@ -1,6 +1,7 @@
 package com.project.mad
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,7 +15,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class SP_Service_Bookings_Fragment : Fragment() {
+class SP_Service_Bookings_Fragment : Fragment(), SPBookingsAdapter.OnItemClickListener{
     private lateinit var listViewBookings: ListView
     private lateinit var SPbookingsAdapter: SPBookingsAdapter
     private lateinit var databaseReference: DatabaseReference
@@ -48,8 +49,10 @@ class SP_Service_Bookings_Fragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 originalBookingsList.clear()
                 for (bookingSnapshot in dataSnapshot.children) {
+                    val bookingId = bookingSnapshot.child("bookingId").getValue(String::class.java)
+                    val customerPhoneNumber = bookingSnapshot.child("customerPhoneNumber").getValue(String::class.java)
                     val serviceProviderId = bookingSnapshot.child("serviceProviderId").getValue(String::class.java)
-                    val datetime = bookingSnapshot.child("acceptrejectdatetime").getValue(String::class.java)
+                    val datetime = bookingSnapshot.child("bookingDateTime").getValue(String::class.java)
                     val servicesBooked = mutableListOf<String>()
                     for (serviceSnapshot in bookingSnapshot.child("servicesBooked").children) {
                         val service = serviceSnapshot.getValue(String::class.java) ?: ""
@@ -58,7 +61,7 @@ class SP_Service_Bookings_Fragment : Fragment() {
                     val categoryName = bookingSnapshot.child("categoryName").getValue(String::class.java)
                     val status = bookingSnapshot.child("status").getValue(String::class.java)
                     if (serviceProviderId != null && servicesBooked.isNotEmpty() && serviceProviderId == userId) {
-                        fetchCategoryImage(categoryName, servicesBooked, status, datetime)
+                        fetchCategoryImage(categoryName, servicesBooked, status, datetime, bookingId, customerPhoneNumber)
                     }
                 }
             }
@@ -69,7 +72,14 @@ class SP_Service_Bookings_Fragment : Fragment() {
         })
     }
 
-    private fun fetchCategoryImage(categoryName: String?, servicesBooked: List<String>, status: String?, datetime: String?) {
+    private fun fetchCategoryImage(
+        categoryName: String?,
+        servicesBooked: List<String>,
+        status: String?,
+        datetime: String?,
+        bookingId: String?,
+        customerPhoneNumber: String?
+    ) {
         if (categoryName != null) {
             val categoryRef = FirebaseDatabase.getInstance().getReference("categories")
             val query = categoryRef.orderByChild("categoryName").equalTo(categoryName)
@@ -84,7 +94,9 @@ class SP_Service_Bookings_Fragment : Fragment() {
                                 status,
                                 categoryName,
                                 imageUrl,
-                                datetime
+                                datetime,
+                                bookingId,
+                                customerPhoneNumber
                             )
                             originalBookingsList.add(booking)
                         }
@@ -119,8 +131,22 @@ class SP_Service_Bookings_Fragment : Fragment() {
             }
         })
     }
+//    override fun onItemClick(booking: SP_Service_Bookings_Fragment.Booking) {
+//        // Handle item click here, for example, show a toast with booking details
+//        Toast.makeText(requireContext(), "Clicked on booking with ID: ${booking.datetime}", Toast.LENGTH_SHORT).show()
+//    }
+    override fun onItemClick(booking: Booking) {
+        // Handle item click here, navigate to the tracking activity
+        val intent = Intent(requireContext(), SP_Tracking_Activity::class.java)
+        // Pass any necessary data to the intent
+        intent.putExtra("bookingId", booking.bookingId)
+        intent.putExtra("customerPhoneNumber", booking.customerPhoneNumber)
+        startActivity(intent)
+    }
+
     private fun updateListView(bookingsList: MutableList<SP_Service_Bookings_Fragment.Booking>) {
         SPbookingsAdapter = SPBookingsAdapter(requireContext(), bookingsList)
+        SPbookingsAdapter.setOnItemClickListener(this) // Set the click listener
         listViewBookings.adapter = SPbookingsAdapter
     }
 
@@ -129,6 +155,8 @@ class SP_Service_Bookings_Fragment : Fragment() {
         val status: String?,
         val categoryName: String?,
         val imageUrl: String?,
-        val datetime: String?
+        val datetime: String?,
+        val bookingId: String?,
+        val customerPhoneNumber: String?
     )
 }

@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/catname"
-            android:fontFamily="@font/sf_pro_display"
+            android:fontFamily="@font/poppins_thin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -29,7 +29,11 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_below="@id/topbar"
+        android:divider="@color/white"
+        android:dividerHeight="2dp"
         android:layout_above="@id/conditionsText"
         android:id="@+id/listView">
     </ListView>
@@ -47,7 +51,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Conditions Apply:"
+            android:text="Conditions apply:"
             android:textSize="20dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
@@ -59,11 +63,11 @@
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:background="@color/grey"
+            android:background="@color/white"
             android:fontFamily="@font/poppins_light"
             android:textAlignment="gravity"
             android:gravity="fill_horizontal"
-            android:text="The Services listed above have multiple subcategories, if you choose any one of the services to provide to the customer you have to do all the services under the category."
+            android:text="If you have the ability to do all the Services listed above, you can choose or else leave it."
             android:textColor="@color/black">
         </TextView>
     </LinearLayout>

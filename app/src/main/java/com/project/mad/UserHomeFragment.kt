@@ -1,11 +1,14 @@
 package com.project.mad
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +17,8 @@ import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +38,7 @@ class UserHomeFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationTextView: TextView
     private lateinit var cart: ImageView
+    private lateinit var cartCountTextView: TextView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -61,9 +67,11 @@ class UserHomeFragment : Fragment() {
 
         // Initialize locationTextView after inflating the layout
         locationTextView = view.findViewById(R.id.location)
+        cartCountTextView = view.findViewById(R.id.cartcount)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         fetchCurrentLocation()
+        isnotificationenabled()
         locationTextView.setOnClickListener{
             fetchCurrentLocation()
         }
@@ -83,7 +91,88 @@ class UserHomeFragment : Fragment() {
             }
         })
 
+
+//        val cartcount = view.findViewById<TextView>(R.id.cartcount)
+//        val cartReference = FirebaseDatabase.getInstance().getReference("cart")
+//
+//        val sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+//        val userId = sharedPreferences.getString("userToken", null)
+//// Construct a query to find the child nodes with matching userId
+//        val query = cartReference.orderByChild("userId").equalTo(userId)
+//
+//// Execute the query
+//        query.addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                var count = 0
+//                for (cartSnapshot in snapshot.children) {
+//                    count++
+//                }
+//                // Assign the count to the TextView
+//                cartcount.text = count.toString()
+//                if (count == 0) {
+//                    cartcount.visibility = View.GONE
+//                } else {
+//                    cartcount.visibility = View.VISIBLE
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                // Handle any errors
+//            }
+//        })
+        updateCartCount()
         return view
+    }
+
+    private fun isnotificationenabled() {
+        if (NotificationManagerCompat.from(requireContext()).areNotificationsEnabled()) {
+            // Notification permission enabled, proceed with usual operation
+            fetchCurrentLocation()
+        } else {
+            // Notification permission not enabled, prompt the user to enable it
+            AlertDialog.Builder(requireContext())
+                .setTitle("Permission Required")
+                .setMessage("Please enable notifications to receive updates.")
+                .setPositiveButton("Settings") { _, _ ->
+                    // Open app settings to allow the user to enable notifications
+                    val intent = Intent().apply {
+                        action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                        data = Uri.fromParts("package", requireContext().packageName, null)
+                    }
+                    startActivity(intent)
+                }
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateCartCount()
+    }
+    private fun updateCartCount() {
+        val cartReference = FirebaseDatabase.getInstance().getReference("cart")
+        val sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("userToken", null)
+        val query = cartReference.orderByChild("userId").equalTo(userId)
+
+
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var count = 0
+                for (cartSnapshot in snapshot.children) {
+                    count++
+                }
+                cartCountTextView.text = count.toString()
+                cartCountTextView.visibility = if (count == 0) View.GONE else View.VISIBLE
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle any errors
+            }
+        })
     }
 
 

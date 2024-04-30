@@ -7,7 +7,7 @@
         android:icon="@drawable/homelogo" />
     <item
         android:id="@+id/navigation_updateservice"
-        android:title="Update"
+        android:title="Services"
         android:icon="@drawable/updatelogo" />
     <item
         android:id="@+id/navigation_bookings"

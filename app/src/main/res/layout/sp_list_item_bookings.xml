@@ -25,14 +25,14 @@
         android:layout_toRightOf="@id/imageviewCategory"
         android:text="Services Booked" />
     <TextView
-    android:textColor="@color/black"
+    android:textColor="@color/grey2"
     android:id="@+id/datetime"
     android:layout_width="match_parent"
     android:layout_marginBottom="10dp"
     android:layout_marginRight="13dp"
     android:gravity="end"
     android:layout_marginLeft="20dp"
-    android:fontFamily="@font/poppins_thin"
+    android:fontFamily="@font/poppins_light"
     android:textSize="15dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
@@ -45,7 +45,7 @@
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
-        android:textColor="@color/grey2"
+        android:textColor="@color/blue1"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_light"
         android:layout_below="@id/datetime"

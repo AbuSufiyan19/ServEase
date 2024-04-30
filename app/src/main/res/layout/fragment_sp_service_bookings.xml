@@ -20,8 +20,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="45dp"
-            android:text="Bookings - Tracking"
+            android:text="Service Bookings"
             android:textSize="25dp"
+            android:textStyle="bold"
             android:textColor="@color/blue1"
             android:fontFamily="@font/sf_pro_display" />
 

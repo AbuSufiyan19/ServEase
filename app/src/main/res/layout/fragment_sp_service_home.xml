@@ -9,58 +9,80 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grey">
-        <TextView
-            android:id="@+id/welcome"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome Service Provider"
             android:background="@color/white"
-            android:textSize="20sp"
-            android:textColor="@color/blue1"
+            android:id="@+id/topbar"
+            android:padding="10dp">
+            <ImageView
+            android:layout_width="18dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/locationlogo"
+            android:src="@drawable/location">
+
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationlogo"
+            android:id="@+id/location"
             android:fontFamily="@font/poppins_thin"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="8dp"/>
+            android:layout_marginTop="2dp"
+            android:layout_centerVertical="true"
+            android:textSize="17dp"
+            android:textColor="@color/grey2"
+            android:layout_marginRight="10dp"
+            android:text="Locate me">
+        </TextView>
+
+            <TextView
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spname"
+                android:text="Name"
+                android:textSize="18sp"
+                android:gravity="end"
+                android:textColor="@color/blue1"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/poppins_thin"
+                android:layout_alignParentEnd="true">
+
+            </TextView>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:id="@+id/lineborder"
+            android:background="@color/grey1"
+            android:layout_below="@id/topbar">
+
+        </TextView>
+
         <RelativeLayout
-            android:layout_width="400dp"
+            android:layout_width="match_parent"
             android:padding="7dp"
             android:id="@+id/available"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:background="@color/white"
-            android:gravity="center"
-            android:layout_below="@id/welcome"
-            android:layout_centerHorizontal="true">
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:id="@+id/locationlogo"
-                android:src="@drawable/location">
-
-            </ImageView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/locationlogo"
-                android:id="@+id/location"
-                android:layout_marginTop="2dp"
-                android:textSize="17dp"
-                android:layout_marginRight="10dp"
-                android:text="Locate me">
-            </TextView>
+            android:layout_below="@id/lineborder"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/availability"
-                android:layout_toRightOf="@id/location"
                 android:layout_marginTop="2dp"
                 android:textSize="17dp"
-                android:layout_marginRight="10dp"
+                android:fontFamily="@font/poppins_light"
+                android:textColor="@color/grey2"
+                android:layout_toLeftOf="@id/availabilityswitch"
+                android:layout_marginRight="5dp"
                 android:text="Update Availability"
                 android:layout_marginLeft="15dp">
 
@@ -68,9 +90,11 @@
             <Switch
                 android:layout_width="wrap_content"
                 android:id="@+id/availabilityswitch"
-                android:layout_toRightOf="@id/availability"
+                android:layout_alignParentEnd="true"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp">
+                android:layout_marginLeft="5dp"
+                android:thumbTint="@color/blue1"
+                android:trackTint="@color/blue1">
             </Switch>
 
         </RelativeLayout>
@@ -78,12 +102,24 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/RecyclerView"
             android:layout_below="@id/available"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
             android:layout_above="@id/conditionsText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/noservices"
+            android:layout_below="@id/available"
+            android:layout_above="@id/conditionsText"
+            android:textColor="@color/grey2"
+            android:fontFamily="@font/poppins_light"
+            android:text="No Service request available right now"
+            android:gravity="center">
+
+        </TextView>
         <LinearLayout
             android:orientation="vertical"
             android:id="@+id/conditionsText"
@@ -97,24 +133,52 @@
                 android:layout_width="match_parent"
                 android:id="@+id/con"
                 android:layout_height="wrap_content"
-                android:text="Conditions Apply:"
+                android:text="Terms &amp; Conditions"
                 android:textSize="20dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:fontFamily="@font/poppins_thin"
                 android:textColor="@color/blue1" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:background="@color/white"
+                android:fontFamily="@font/poppins_light"
+                android:textAlignment="gravity"
+                android:gravity="fill_horizontal"
+                android:text="1. When you entering into the app, first and foremost thing you should update your availability. "
+                android:textColor="@color/black">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+                android:fontFamily="@font/poppins_light"
+                android:textAlignment="textStart"
+                android:gravity="start"
+                android:text="2. The Booked services will be displayed in this page. If you are willing to do the service, you can ACCEPT the request or else REJECT it."
+                android:textColor="@color/black" />
+
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:background="@color/grey"
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
                 android:fontFamily="@font/poppins_light"
                 android:textAlignment="gravity"
                 android:gravity="fill_horizontal"
-                android:text="The Services listed above are booked by the customers, accept or reject the service and do complete it on time for better ratings for your profile."
+                android:text="3. If you accept the service request from the customer, you should complete the entire work and update the status accordingly in the service tracking page."
                 android:textColor="@color/black">
+
             </TextView>
         </LinearLayout>
     </RelativeLayout>

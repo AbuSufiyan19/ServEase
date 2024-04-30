@@ -74,7 +74,7 @@ tools:context=".SignUpActivity">
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:imeOptions="actionNext"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
                 ></EditText>
         </LinearLayout>
         <LinearLayout
@@ -226,9 +226,8 @@ tools:context=".SignUpActivity">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Reenter Password"
+                android:text="Confirm Password"
                 android:fontFamily="@font/poppins_thin"
-
                 android:textColor="#3a3a3a"
                 android:textSize="16sp"
                 ></TextView>

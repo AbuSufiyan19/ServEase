@@ -6,7 +6,10 @@
         <item name="colorOnPrimary">@color/black</item>
         <item name="colorPrimaryVariant">@color/blue1</item>
         <item name="android:statusBarColor">@color/black</item>
+        <item name="android:windowFullscreen">false</item>
+
     </style>
+
 
     <style name="Theme.MAD" parent="Base.Theme.MAD" />
     <style name="ThemeOverlay.Material3.Search" parent="">
