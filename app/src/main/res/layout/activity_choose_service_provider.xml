@@ -34,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/topbar"
+        tools:listitem="@layout/choose_list_item"
         android:layout_above="@id/bottombar"
         android:dividerHeight="1.5dp"
         android:divider="@color/white"

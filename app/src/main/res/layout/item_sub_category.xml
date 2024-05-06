@@ -18,6 +18,7 @@
             android:id="@+id/subcategoryimage"
             android:layout_width="150dp"
             android:layout_margin="5dp"
+            android:src="@drawable/logoapp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true" />
@@ -28,6 +29,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:textAlignment="center"
+            android:text="SubCategory"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/subcategoryimage"
             android:layout_height="wrap_content"

@@ -19,6 +19,7 @@
             android:id="@+id/categoryImageView"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:src="@drawable/logoapp"
             android:scaleType="centerCrop"
             android:layout_gravity="center"
             android:adjustViewBounds="true" />
@@ -29,6 +30,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:fontFamily="@font/poppins_thin"
+            android:text="Category"
             android:textSize="10dp"
             android:gravity="center"/>
 

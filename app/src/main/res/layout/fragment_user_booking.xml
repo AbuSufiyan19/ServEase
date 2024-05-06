@@ -55,6 +55,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/searchView"
         android:dividerHeight="1.5dp"
+        tools:listitem="@layout/list_item_booking"
         android:divider="@color/grey1"/>
 
 </RelativeLayout>
