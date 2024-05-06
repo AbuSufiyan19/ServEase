@@ -107,6 +107,7 @@
             android:layout_marginBottom="20dp"
             android:layout_above="@id/conditionsText"
             android:layout_width="match_parent"
+            tools:listitem="@layout/sp_item_acceptreject"
             android:layout_height="match_parent"/>
         <TextView
             android:layout_width="match_parent"

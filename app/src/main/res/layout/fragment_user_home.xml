@@ -193,7 +193,8 @@ android:layout_height="match_parent"
     android:layout_marginTop="20dp"
     android:layout_below="@id/card"
     android:clipToPadding="false"
-    android:scrollbars="vertical" />
+    android:scrollbars="vertical"
+    tools:listitem="@layout/item_card"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="414dp"

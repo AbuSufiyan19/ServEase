@@ -68,6 +68,7 @@
         android:layout_above="@+id/bottombar"
         android:layout_height="match_parent"
         android:layout_marginTop="2dp"
+        tools:listitem="@layout/cart_item_layout"
         android:clipToPadding="false"
         android:scrollbars="vertical" />
 

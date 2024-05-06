@@ -6,6 +6,7 @@
         android:id="@+id/imageviewCategory"
         android:layout_width="110dp"
         android:layout_margin="10dp"
+        android:src="@drawable/logoapp"
         android:layout_centerVertical="true"
         android:layout_height="90dp">
 
