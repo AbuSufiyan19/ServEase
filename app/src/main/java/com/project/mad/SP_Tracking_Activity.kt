@@ -34,9 +34,6 @@ class SP_Tracking_Activity : AppCompatActivity() {
     private lateinit var cancelledDateTime: String
 
 
-
-
-
     private lateinit var address: String
     private lateinit var bookingDateTime: String
     private lateinit var categoryName: String
@@ -97,7 +94,6 @@ class SP_Tracking_Activity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_sp_tracking)
 
         acc_rej0 = findViewById(R.id.acc_rej0)
@@ -148,22 +144,11 @@ class SP_Tracking_Activity : AppCompatActivity() {
         orderIdTextView.text = bookingId
 
         val call = findViewById<ImageView>(R.id.call)
+        customerPhoneNumberTextView.setOnClickListener{
+            callphonefn()
+        }
         call.setOnClickListener {
-            if (!customerPhoneNumber.isNullOrEmpty()) {
-                // Check if the app has permission to make phone calls
-                if (ContextCompat.checkSelfPermission(this@SP_Tracking_Activity, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                    // Permission is granted, proceed with making the call
-                    val intent = Intent(Intent.ACTION_DIAL)
-                    intent.data = Uri.parse("tel:$customerPhoneNumber")
-                    startActivity(intent)
-                } else {
-                    // Permission is not granted, request it from the user
-                    ActivityCompat.requestPermissions(this@SP_Tracking_Activity, arrayOf(Manifest.permission.CALL_PHONE), REQUEST_CALL_PERMISSION)
-                }
-            } else {
-                // Handle case where phone number is not available or empty
-                Toast.makeText(this@SP_Tracking_Activity, "Phone number not available", Toast.LENGTH_SHORT).show()
-            }
+            callphonefn()
         }
 
 // Add this constant at the top of your activity
@@ -278,6 +263,24 @@ class SP_Tracking_Activity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun callphonefn() {
+        if (customerPhoneNumber.isNotEmpty()) {
+            // Check if the app has permission to make phone calls
+            if (ContextCompat.checkSelfPermission(this@SP_Tracking_Activity, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                // Permission is granted, proceed with making the call
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:$customerPhoneNumber")
+                startActivity(intent)
+            } else {
+                // Permission is not granted, request it from the user
+                ActivityCompat.requestPermissions(this@SP_Tracking_Activity, arrayOf(Manifest.permission.CALL_PHONE), REQUEST_CALL_PERMISSION)
+            }
+        } else {
+            // Handle case where phone number is not available or empty
+            Toast.makeText(this@SP_Tracking_Activity, "Phone number not available", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

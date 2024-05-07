@@ -9,8 +9,9 @@
     <RelativeLayout
         android:id="@+id/topbar"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:paddingTop="15dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dp"
+        android:paddingBottom="6dp"
         android:layout_marginBottom="5dp"
         android:background="@color/white">
 

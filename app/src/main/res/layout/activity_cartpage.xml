@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -11,16 +10,16 @@
     <RelativeLayout
         android:id="@+id/topbar"
         android:layout_width="match_parent"
-        android:layout_height="73dp"
-        android:background="@color/white"
-        android:paddingTop="15dp">
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/mycart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="6dp"
             android:layout_toLeftOf="@id/deleteall"
             android:fontFamily="@font/sf_pro_display"
             android:text="My Cart"
@@ -35,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="13dp"
             android:layout_marginRight="20dp"
             android:src="@drawable/deleteall">
 

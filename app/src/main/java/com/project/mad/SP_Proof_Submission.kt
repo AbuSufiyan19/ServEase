@@ -32,7 +32,6 @@ class SP_Proof_Submission : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_sp_proof_submission)
 
         imageView = findViewById(R.id.imageView)

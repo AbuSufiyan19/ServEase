@@ -29,6 +29,7 @@ import com.google.firebase.database.*
 import java.util.Locale
 
 
+@Suppress("DEPRECATION")
 class UserHomeFragment : Fragment() {
 
     private lateinit var databaseReference: DatabaseReference
@@ -52,8 +53,8 @@ class UserHomeFragment : Fragment() {
         databaseReference = FirebaseDatabase.getInstance().reference
 
         cart = view.findViewById(R.id.cart)
-        cart.setOnClickListener { // Define your navigation logic here to navigate to the 'cartpage'
-            val intent: Intent = Intent(requireContext(), cartpage::class.java)
+        cart.setOnClickListener {
+            val intent = Intent(requireContext(), cartpage::class.java)
             startActivity(intent)
         }
 
@@ -210,7 +211,7 @@ class UserHomeFragment : Fragment() {
                         val geocoder = Geocoder(requireContext(), Locale.getDefault())
                         try {
                             val addresses: List<Address>? = geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                            if (addresses != null && addresses.isNotEmpty()) {
+                            if (!addresses.isNullOrEmpty()) {
                                 val city = addresses[0].locality ?: ""
                                 val adminarea = addresses[0].adminArea ?: ""
 //                                val thoroughfare = addresses[0].thoroughfare ?: ""
@@ -260,6 +261,7 @@ class UserHomeFragment : Fragment() {
     }
 
 
+    @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1) {

@@ -25,7 +25,6 @@ class SP_ServiceUpdate_Confirm : AppCompatActivity() {
     private lateinit var listView: ListView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_sp_service_update_confirm)
 
         databaseReference = FirebaseDatabase.getInstance().reference

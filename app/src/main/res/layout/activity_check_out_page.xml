@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -10,16 +9,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="wrap_content"
         android:id="@+id/topbar"
-        android:paddingTop="15dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="7dp"
         android:background="@color/white">
 
         <TextView
             android:id="@+id/checkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginRight="45dp"
             android:textColor="@color/blue1"
             android:text="Check_out"

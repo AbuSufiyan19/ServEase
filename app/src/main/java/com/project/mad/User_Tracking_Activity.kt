@@ -97,7 +97,6 @@ class User_Tracking_Activity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_user_tracking)
 
         acc_rej0 = findViewById(R.id.acc_rej0)
@@ -147,24 +146,12 @@ class User_Tracking_Activity : AppCompatActivity() {
             finish()
         }
         val call = findViewById<ImageView>(R.id.call)
+        val callphone = findViewById<TextView>(R.id.callphone)
+        callphone.setOnClickListener{
+            callphonefn()
+        }
         call.setOnClickListener {
-            if (!serviceProviderPhoneNumber.isNullOrEmpty()) {
-                // Check if the app has permission to make phone calls
-                if (ContextCompat.checkSelfPermission(this@User_Tracking_Activity, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                    // Permission is granted, proceed with making the call
-                    val intent = Intent(Intent.ACTION_DIAL)
-                    intent.data = Uri.parse("tel:$serviceProviderPhoneNumber")
-                    startActivity(intent)
-                } else {
-                    // Permission is not granted, request it from the user
-                    ActivityCompat.requestPermissions(this@User_Tracking_Activity, arrayOf(Manifest.permission.CALL_PHONE),
-                        SP_Tracking_Activity.REQUEST_CALL_PERMISSION
-                    )
-                }
-            } else {
-                // Handle case where phone number is not available or empty
-                Toast.makeText(this@User_Tracking_Activity, "Phone number not available", Toast.LENGTH_SHORT).show()
-            }
+            callphonefn()
         }
         buttonpaid.visibility = View.GONE
         ratings.visibility = View.GONE
@@ -321,6 +308,27 @@ class User_Tracking_Activity : AppCompatActivity() {
         }
 
     }
+
+    private fun callphonefn() {
+        if (serviceProviderPhoneNumber.isNotEmpty()) {
+            // Check if the app has permission to make phone calls
+            if (ContextCompat.checkSelfPermission(this@User_Tracking_Activity, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                // Permission is granted, proceed with making the call
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:$serviceProviderPhoneNumber")
+                startActivity(intent)
+            } else {
+                // Permission is not granted, request it from the user
+                ActivityCompat.requestPermissions(this@User_Tracking_Activity, arrayOf(Manifest.permission.CALL_PHONE),
+                    SP_Tracking_Activity.REQUEST_CALL_PERMISSION
+                )
+            }
+        } else {
+            // Handle case where phone number is not available or empty
+            Toast.makeText(this@User_Tracking_Activity, "Phone number not available", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == SP_Tracking_Activity.REQUEST_CALL_PERMISSION) {

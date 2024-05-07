@@ -32,7 +32,6 @@ class SubCategorypage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_sub_categorypage)
 
         databaseReference = FirebaseDatabase.getInstance().reference

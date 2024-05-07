@@ -13,7 +13,6 @@ import com.google.firebase.database.FirebaseDatabase
 class UserQueryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_user_query)
 
         // Retrieve bookingId from intent

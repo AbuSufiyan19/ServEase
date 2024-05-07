@@ -40,7 +40,6 @@ class CheckOutPage : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_check_out_page)
 
         customername = findViewById(R.id.customername)

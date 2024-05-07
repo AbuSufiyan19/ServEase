@@ -112,7 +112,6 @@
                 android:textColor="@color/grey2"
                 android:text="Call"/>
 
-
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -521,7 +520,8 @@
                 android:gravity="center"
                 android:layout_height="wrap_content"
                 android:text="Ratings"
-                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 android:textColor="@color/red"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_light"
@@ -534,7 +534,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_light"
                 android:text="Review"
-                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 android:textColor="@color/red"
                 android:layout_marginBottom="5dp"
                 />
