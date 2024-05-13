@@ -64,9 +64,10 @@ class LoginActivity : AppCompatActivity() {
                 dialogView.findViewById<Button>(R.id.buttonOk).setOnClickListener {
                     dialog.dismiss() // Dismiss dialog if OK is clicked
                     sendPasswordResetEmail(email) // Send password reset email
+
                 }
             } else {
-                Toast.makeText(this, "Please enter email address", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter valid email address", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -120,19 +121,39 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun sendPasswordResetEmail(email: String) {
-        firebaseAuth.sendPasswordResetEmail(email)
+        firebaseAuth.fetchSignInMethodsForEmail(email)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Password reset email sent successfully", Toast.LENGTH_SHORT).show()
-                    // Password reset email sent successfully
-                    // You can show a toast or perform any other action here
+                    val signInMethods = task.result?.signInMethods
+                    if (signInMethods != null && signInMethods.isNotEmpty()) {
+                        // Email is registered, proceed with sending password reset email
+                        firebaseAuth.sendPasswordResetEmail(email)
+                            .addOnCompleteListener { passwordResetTask ->
+                                if (passwordResetTask.isSuccessful) {
+                                    Toast.makeText(this, "Password reset email sent successfully", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(this, "Password reset email failed to send", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                    } else {
+                        // Email is not registered
+                        Snackbar.make(
+                            findViewById(android.R.id.content),
+                            "Email is not registered",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
                 } else {
-                    Toast.makeText(this, "Password reset email failed to send", Toast.LENGTH_SHORT).show()
-                    // Password reset email failed to send
-                    // You can show a toast or perform any other action here
+                    // Error occurred while checking email registration
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Error occurred while checking email registration",
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             }
     }
+
 
     private fun validateEmail(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
@@ -211,14 +232,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun clearSession() {
-        val user = firebaseAuth.currentUser
-        if (user != null) {
-            val sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.clear().apply()
-        }
-    }
 
 
 
@@ -310,7 +323,7 @@ class LoginActivity : AppCompatActivity() {
 //                        Toast.makeText(this@LoginActivity, "Customer login", Toast.LENGTH_LONG)
 //                            .show()
                         navigateToUserHomePage()
-                       } else {
+                    } else {
                         // Email does not exist in the serviceMan collection
                         Toast.makeText(this@LoginActivity, "Not an User", Toast.LENGTH_LONG)
                             .show()

@@ -69,9 +69,7 @@
         <activity
             android:name=".ServiceManHomePageActivity"
             android:exported="false" />
-        <activity
-            android:name=".AdminHomePageActivity"
-            android:exported="false" />
+
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
