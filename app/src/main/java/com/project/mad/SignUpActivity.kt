@@ -100,7 +100,7 @@ class SignUpActivity : AppCompatActivity() {
             if (!hasFocus) {
                 val password = editTextPassword.text.toString().trim()
                 if (!validatePassword(password)) {
-                    editTextPassword.error = "Enter a valid password" // Adjust the error message as needed
+                    editTextPassword.error = "Password must contains 1 uppercase, 1 lowercase, 1 special character, 1 number and with a minimum of 8 characters." // Adjust the error message as needed
                 } else {
                     editTextPassword.error = null
                 }
