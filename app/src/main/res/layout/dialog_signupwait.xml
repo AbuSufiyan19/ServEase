@@ -1,0 +1,34 @@
+<!-- dialog_confirmation.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="26dp">
+
+    <TextView
+        android:id="@+id/textViewMessage"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_thin"
+        android:text="Registration in progress,"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"/>
+    <TextView
+        android:id="@+id/textViewMessage2"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_thin"
+        android:text="please wait..."
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textColor="@color/blue1"
+        android:paddingBottom="16dp"/>
+</LinearLayout>
+
+
+

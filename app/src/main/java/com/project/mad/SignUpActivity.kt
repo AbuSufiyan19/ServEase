@@ -1,16 +1,21 @@
 package com.project.mad
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.database.FirebaseDatabase
@@ -53,10 +58,11 @@ class SignUpActivity : AppCompatActivity() {
 
 
         // Populate the Spinner with options
-        val userTypeOptions = arrayOf("Customer", "Service Man")
+        val userTypeOptions = arrayOf("Select","Customer", "Service Man")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, userTypeOptions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerUserType.adapter = adapter
+
 
 
         // Set onFocusChangeListener for editTextUsername
@@ -132,21 +138,35 @@ class SignUpActivity : AppCompatActivity() {
 
             if(username.isNotEmpty() && validateUserName(username)) {
                 if (email.isNotEmpty() && validateEmail(email)) {
-                    if (phoneNumber.isNotEmpty() && validatePhoneNumber(phoneNumber)) {
-                        if (password.isNotEmpty() && validatePassword(password)) {
-                            if(rePassword.isNotEmpty() && password==rePassword) {
-                                signUp(username, email, phoneNumber, userType, password)
+                    if(!userType.equals("Select")) {
+                        if (phoneNumber.isNotEmpty() && validatePhoneNumber(phoneNumber)) {
+                            if (password.isNotEmpty() && validatePassword(password)) {
+                                if (rePassword.isNotEmpty() && password == rePassword) {
+                                    val dialogView = LayoutInflater.from(this)
+                                        .inflate(R.layout.dialog_signupwait, null)
+                                    val dialogBuilder = AlertDialog.Builder(this)
+                                        .setView(dialogView)
+                                    val dialog = dialogBuilder.create()
+                                    dialog.show()
+                                    signUp(username, email, phoneNumber, userType, password)
+                                } else {
+                                    Toast.makeText(
+                                        this,
+                                        "Passwords do not match",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            } else {
+                                Toast.makeText(this, "Enter a valid password", Toast.LENGTH_SHORT)
+                                    .show()
                             }
-                            else{
-                                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
-                            }
+                        } else {
+                            Toast.makeText(this, "Enter a valid phone number", Toast.LENGTH_SHORT)
+                                .show()
                         }
-                        else {
-                            Toast.makeText(this, "Enter a valid password", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    else {
-                        Toast.makeText(this, "Enter a valid phone number", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(this, "Select User Type", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
                 else {
@@ -159,11 +179,13 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+
     private fun validateUserName(username: String): Boolean {
         val usernamePattern: Pattern =
-            Pattern.compile("^[a-zA-Z0-9_]{5,16}$")
+            Pattern.compile("^[a-zA-Z0-9_ ]{5,16}$")
         return usernamePattern.matcher(username).matches()
     }
+
 
     private fun validatePhoneNumber(phoneNumber: String): Boolean {
         val phonePattern: Pattern = Pattern.compile("\\d{10}") // Matches exactly 10 digits
@@ -220,7 +242,9 @@ class SignUpActivity : AppCompatActivity() {
                                                         "Sign up successful",
                                                         Toast.LENGTH_SHORT
                                                     ).show()
-                                                    val intent = Intent(this, LoginActivity::class.java)
+                                                    val intent = Intent(this, LoginActivity::class.java).apply {
+                                                        putExtra("emailverify","true")
+                                                    }
                                                     startActivity(intent)
                                                     finish()
                                                 }
@@ -255,7 +279,7 @@ class SignUpActivity : AppCompatActivity() {
                         Toast.makeText(
                             this,
                             "The email address is already in use by another account.",
-                            Toast.LENGTH_SHORT
+                            Toast.LENGTH_LONG
                         ).show()
                     } else {
                         Toast.makeText(

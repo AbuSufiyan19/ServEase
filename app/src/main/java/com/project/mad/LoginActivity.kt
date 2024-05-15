@@ -44,6 +44,15 @@ class LoginActivity : AppCompatActivity() {
         buttonLogin = findViewById(R.id.buttonLogin)
         textViewSignUp = findViewById(R.id.textViewSignUp)
 
+        val emailverify = intent.getStringExtra("emailverify")
+        if (emailverify.equals("true")){
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                "Please check your email for the verification link and verify it to proceed with the login process.",
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
+
         forgotPasswordTextView = findViewById(R.id.forgotpassword)
         // Set OnClickListener for the TextView
         forgotPasswordTextView.setOnClickListener {

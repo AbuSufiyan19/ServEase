@@ -74,7 +74,7 @@ tools:context=".SignUpActivity">
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:imeOptions="actionNext"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 _"
                 ></EditText>
         </LinearLayout>
         <LinearLayout
