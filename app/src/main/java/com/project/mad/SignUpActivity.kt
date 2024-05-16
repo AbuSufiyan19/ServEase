@@ -34,6 +34,8 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var buttonSignUp: Button
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseDatabase: FirebaseDatabase
+    private var progressDialog: AlertDialog? = null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,12 +144,14 @@ class SignUpActivity : AppCompatActivity() {
                         if (phoneNumber.isNotEmpty() && validatePhoneNumber(phoneNumber)) {
                             if (password.isNotEmpty() && validatePassword(password)) {
                                 if (rePassword.isNotEmpty() && password == rePassword) {
-                                    val dialogView = LayoutInflater.from(this)
-                                        .inflate(R.layout.dialog_signupwait, null)
-                                    val dialogBuilder = AlertDialog.Builder(this)
-                                        .setView(dialogView)
-                                    val dialog = dialogBuilder.create()
-                                    dialog.show()
+                                    showProgressDialog()
+
+//                                    val dialogView = LayoutInflater.from(this)
+//                                        .inflate(R.layout.dialog_signupwait, null)
+//                                    val dialogBuilder = AlertDialog.Builder(this)
+//                                        .setView(dialogView)
+//                                    val dialog = dialogBuilder.create()
+//                                    dialog.show()
                                     signUp(username, email, phoneNumber, userType, password)
                                 } else {
                                     Toast.makeText(
@@ -177,6 +181,17 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "Enter a valid username", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun showProgressDialog() {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_signupwait, null)
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+        progressDialog = dialogBuilder.create()
+        progressDialog?.show()
+    }
+    private fun dismissProgressDialog() {
+        progressDialog?.dismiss()
     }
 
 
@@ -239,7 +254,7 @@ class SignUpActivity : AppCompatActivity() {
                                                 .addOnSuccessListener {
                                                     Toast.makeText(
                                                         this,
-                                                        "Sign up successful",
+                                                        "Registered successful",
                                                         Toast.LENGTH_SHORT
                                                     ).show()
                                                     val intent = Intent(this, LoginActivity::class.java).apply {
@@ -276,6 +291,7 @@ class SignUpActivity : AppCompatActivity() {
                 } else {
                     // Check if the failure is due to email already in use
                     if (task.exception is FirebaseAuthUserCollisionException) {
+                        dismissProgressDialog()
                         Toast.makeText(
                             this,
                             "The email address is already in use by another account.",

@@ -19,6 +19,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -131,10 +132,10 @@ class UserHomeFragment : Fragment() {
             fetchCurrentLocation()
         } else {
             // Notification permission not enabled, prompt the user to enable it
-            AlertDialog.Builder(requireContext())
-                .setTitle("Permission Required")
-                .setMessage("Please enable notifications to receive updates.")
-                .setPositiveButton("Settings") { _, _ ->
+            val dialog = AlertDialog.Builder(requireContext()).apply {
+//                setTitle("Permission Required")
+                setMessage("Please enable notifications to receive updates.")
+                setPositiveButton("Settings") { _, _ ->
                     // Open app settings to allow the user to enable notifications
                     val intent = Intent().apply {
                         action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
@@ -142,10 +143,24 @@ class UserHomeFragment : Fragment() {
                     }
                     startActivity(intent)
                 }
-                .setNegativeButton("Cancel") { dialog, _ ->
+                setNegativeButton("Cancel") { dialog, _ ->
                     dialog.dismiss()
                 }
-                .show()
+            }.create()
+
+// Set title text color
+            dialog.setOnShowListener {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.holo_red_light))
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.holo_blue_dark))
+                dialog.window?.setBackgroundDrawableResource(android.R.color.white)
+
+                // Set message text color to black
+                dialog.findViewById<TextView>(android.R.id.message)?.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
+
+            }
+
+            dialog.show()
+
         }
     }
 
