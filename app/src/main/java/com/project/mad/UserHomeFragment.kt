@@ -230,10 +230,12 @@ class UserHomeFragment : Fragment() {
                                 val city = addresses[0].locality ?: ""
                                 val adminarea = addresses[0].adminArea ?: ""
 //                                val thoroughfare = addresses[0].thoroughfare ?: ""
+                                val fulladdress = addresses[0].getAddressLine(0)
+
 
                                 val completeAddress = "$city, $adminarea"
                                 locationTextView.text = completeAddress
-                                updateLocationInDatabase(location.latitude, location.longitude)
+                                updateLocationInDatabase(location.latitude, location.longitude, fulladdress)
                             } else {
                                 Toast.makeText(requireContext(), "Address not found", Toast.LENGTH_SHORT).show()
                             }
@@ -253,7 +255,7 @@ class UserHomeFragment : Fragment() {
     }
 
 
-    private fun updateLocationInDatabase(latitude: Double, longitude: Double) {
+    private fun updateLocationInDatabase(latitude: Double, longitude: Double, fulladdress: String) {
         firebaseAuth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().reference.child("users")
         val userId = firebaseAuth.currentUser?.uid
@@ -261,7 +263,8 @@ class UserHomeFragment : Fragment() {
             val currentUserRef = databaseReference.child(userId).child("location")
             val locationMap = hashMapOf(
                 "latitude" to latitude,
-                "longitude" to longitude
+                "longitude" to longitude,
+                "FullAddress" to fulladdress
             )
             currentUserRef.setValue(locationMap)
                 .addOnSuccessListener {
