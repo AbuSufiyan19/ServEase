@@ -67,10 +67,29 @@ class MainActivity : AppCompatActivity() {
                                 return
                             }
                             else if (approvalStatus == "Proof Uploaded") {
-                                Snackbar.make(
-                                    findViewById(android.R.id.content),
-                                    "Your Document will be verified within 3 to 4 hours until then wait patiently",
-                                    Snackbar.LENGTH_LONG
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "Document will be verified within 3 to 4 hours",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "Please Login to check status",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                navigateToLoginPage()
+                                return
+                            }
+                            else if(approvalStatus == "ReUpload"){
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    " You need to Reupload your Document",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "Please Login to upload Document",
+                                    Toast.LENGTH_LONG
                                 ).show()
                                 navigateToLoginPage()
                                 return

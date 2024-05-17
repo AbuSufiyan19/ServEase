@@ -2,6 +2,7 @@ package com.project.mad
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -26,6 +27,8 @@ class SP_Proof_Submission : AppCompatActivity() {
     private lateinit var uploadImageButton: Button
     private lateinit var login: TextView
     private lateinit var approvalstatus: TextView
+    private var progressDialog: ProgressDialog? = null
+
 
 
     private val PICK_IMAGE_REQUEST = 1
@@ -44,12 +47,16 @@ class SP_Proof_Submission : AppCompatActivity() {
             startActivity(intent)
             finish() // Finish the current activity, as we don't want the user to go back to the login page
         }
+        progressDialog = ProgressDialog(this, R.style.CustomProgressDialog)
+        progressDialog?.setMessage("Uploading...")
+        progressDialog?.setCancelable(false)
 
         uploadImageButton.setOnClickListener {
             val userId = getUserIdFromSharedPreferences()
             if (userId.isNotEmpty()) {
                 val imageUri = imageView.tag as? Uri
                 if (imageUri != null) {
+                    progressDialog?.show()
                     upload(userId, imageUri)
                 } else {
                     // Show a toast message to prompt the user to choose the proof
@@ -74,6 +81,8 @@ class SP_Proof_Submission : AppCompatActivity() {
                         val newApprovalStatus = dataSnapshot.child("approvalstatus").getValue(String::class.java)
                         val statusText = if (newApprovalStatus.isNullOrEmpty()) {
                             "No Document Uploaded"
+                        } else if(newApprovalStatus=="ReUpload") {
+                            "Upload a Valid Document"
                         } else {
                             "$newApprovalStatus"
                         }
@@ -83,13 +92,17 @@ class SP_Proof_Submission : AppCompatActivity() {
                             uploadImageButton.visibility = View.GONE // Hide the upload button
                         }
 
-                        val imageURL = dataSnapshot.child("imageURL").getValue(String::class.java)
+                        if (newApprovalStatus != "ReUpload") {
+
+                            val imageURL = dataSnapshot.child("imageURL").getValue(String::class.java)
                         imageURL?.let {
                             // Load the image into ImageView using a library like Glide or Picasso
                             Glide.with(this@SP_Proof_Submission)
                                 .load(it)
                                 .into(imageView)
                             imageView.tag = Uri.parse(it) // Store the image URI in tag for later use
+                        }
+
                         }
                         // Set OnClickListener on ImageView
                         imageView.setOnClickListener {
@@ -133,6 +146,7 @@ class SP_Proof_Submission : AppCompatActivity() {
                             // Now update the approvalstatus attribute to indicate proofuploaded
                             serviceManRef.child("approvalstatus").setValue("Proof Uploaded")
                                 .addOnSuccessListener {
+                                    progressDialog?.dismiss()
                                     // Approval status updated successfully
                                     Toast.makeText(this@SP_Proof_Submission, "Document Submitted Successfully", Toast.LENGTH_SHORT).show()
                                     uploadImageButton.visibility = View.VISIBLE
@@ -141,6 +155,7 @@ class SP_Proof_Submission : AppCompatActivity() {
                                 }
                                 .addOnFailureListener { e ->
                                     // Handle any errors
+                                    progressDialog?.dismiss()
                                     Toast.makeText(this@SP_Proof_Submission, "Submission Error", Toast.LENGTH_SHORT).show()
 
                                 }

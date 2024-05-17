@@ -282,12 +282,22 @@
                                         findViewById(android.R.id.content),
                                         "Your Document will be verified within 3 to 4 hours until then wait patiently",
                                         Snackbar.LENGTH_LONG
-                                    ).show()                            }
+                                    ).show()
+                                }
+                                else if (approvalStatus == "ReUpload"){
+                                    Snackbar.make(
+                                        findViewById(android.R.id.content),
+                                        "You need to reupload a valid document for Verification",
+                                        Snackbar.LENGTH_LONG
+                                    ).show()
+                                    navigateToProofPage()
+                                    return
+                                }
                                 else{
-                                    Toast.makeText(
-                                        this@LoginActivity,
-                                        "You need to upload your Document",
-                                        Toast.LENGTH_LONG
+                                    Snackbar.make(
+                                        findViewById(android.R.id.content),
+                                        "You need to upload your Document for Verification",
+                                        Snackbar.LENGTH_LONG
                                     ).show()
                                     navigateToProofPage()
                                     return
