@@ -1,5 +1,6 @@
 package com.project.mad
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.SearchView
+import android.widget.TextView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -20,10 +22,12 @@ class SP_Service_Bookings_Fragment : Fragment(), SPBookingsAdapter.OnItemClickLi
     private lateinit var SPbookingsAdapter: SPBookingsAdapter
     private lateinit var databaseReference: DatabaseReference
     private lateinit var searchView: SearchView
+    private lateinit var nobookings: TextView
 
     private var originalBookingsList: MutableList<SP_Service_Bookings_Fragment.Booking> = mutableListOf()
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +39,7 @@ class SP_Service_Bookings_Fragment : Fragment(), SPBookingsAdapter.OnItemClickLi
         searchView = view.findViewById(R.id.searchView)
         fetchUserBookings(getUserIdFromSharedPreferences())
         setupSearchView()
+        nobookings = view.findViewById(R.id.nobookings)
         return view
     }
     private fun getUserIdFromSharedPreferences(): String {
@@ -64,6 +69,17 @@ class SP_Service_Bookings_Fragment : Fragment(), SPBookingsAdapter.OnItemClickLi
                         fetchCategoryImage(categoryName, servicesBooked, status, datetime, bookingId, customerPhoneNumber)
                     }
                 }
+//                // Update visibility based on the bookings list
+//                if (originalBookingsList.isEmpty()) {
+//                    nobookings.visibility = View.VISIBLE
+//                    listViewBookings.visibility = View.GONE
+//                    searchView.visibility = View.GONE
+//                } else {
+//                    nobookings.visibility = View.GONE
+//                    listViewBookings.visibility = View.VISIBLE
+//                    searchView.visibility = View.VISIBLE
+//                    updateListView(originalBookingsList)
+//                }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -101,8 +117,17 @@ class SP_Service_Bookings_Fragment : Fragment(), SPBookingsAdapter.OnItemClickLi
                             originalBookingsList.add(booking)
                         }
                     }
-                    // Initialize adapter with the populated list
-                    updateListView(originalBookingsList)
+                    // Update visibility based on the bookings list
+                    if (originalBookingsList.isEmpty()) {
+                        nobookings.visibility = View.VISIBLE
+                        listViewBookings.visibility = View.GONE
+                        searchView.visibility = View.GONE
+                    } else {
+                        nobookings.visibility = View.GONE
+                        listViewBookings.visibility = View.VISIBLE
+                        searchView.visibility = View.VISIBLE
+                        updateListView(originalBookingsList)
+                    }
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {

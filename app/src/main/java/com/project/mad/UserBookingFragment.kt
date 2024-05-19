@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,6 +20,8 @@ class UserBookingFragment : Fragment() {
     private lateinit var bookingsAdapter: BookingAdapter
     private lateinit var databaseReference: DatabaseReference
     private lateinit var searchView: SearchView
+    private lateinit var nobookings: TextView
+
 
     private lateinit var bookingId: String
     private lateinit var serviceProviderPhoneNumber: String
@@ -35,6 +38,8 @@ class UserBookingFragment : Fragment() {
         searchView = view.findViewById(R.id.searchView)
         fetchUserBookings(getUserIdFromSharedPreferences())
         setupSearchView()
+        nobookings = view.findViewById(R.id.nobookings)
+
 
         listViewBookings.setOnItemClickListener { _, _, position, _ ->
             val booking = bookingsAdapter.getItem(position)
@@ -119,7 +124,17 @@ class UserBookingFragment : Fragment() {
                         }
                     }
                     // Initialize adapter with the populated list
-                    updateListView(originalBookingsList)
+//                    updateListView(originalBookingsList)
+                    if (originalBookingsList.isEmpty()) {
+                        nobookings.visibility = View.VISIBLE
+                        listViewBookings.visibility = View.GONE
+                        searchView.visibility = View.GONE
+                    } else {
+                        nobookings.visibility = View.GONE
+                        listViewBookings.visibility = View.VISIBLE
+                        searchView.visibility = View.VISIBLE
+                        updateListView(originalBookingsList)
+                    }
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {

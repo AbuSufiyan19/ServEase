@@ -37,6 +37,18 @@
         android:layout_below="@id/topbar">
 
     </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/nobookings"
+        android:layout_height="wrap_content"
+        android:text="No Bookings yet now"
+        android:textSize="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:textColor="@color/grey2"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+    </TextView>
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="410dp"

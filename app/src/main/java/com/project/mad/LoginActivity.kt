@@ -31,6 +31,8 @@
         private lateinit var firebaseAuth: FirebaseAuth
         private lateinit var databaseReference: DatabaseReference
         private var progressDialog: ProgressDialog? = null
+        private lateinit var firebaseDatabase: FirebaseDatabase
+
 
 
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +41,8 @@
             createNotificationChannel()
     
             firebaseAuth = FirebaseAuth.getInstance()
+            firebaseDatabase = FirebaseDatabase.getInstance()
+
             databaseReference =
                 FirebaseDatabase.getInstance().reference.child("users") // "users" is the node in the Realtime Database
     
@@ -137,42 +141,73 @@
                 startActivity(intent)
             }
         }
-    
+
         private fun sendPasswordResetEmail(email: String) {
-            firebaseAuth.fetchSignInMethodsForEmail(email)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val signInMethods = task.result?.signInMethods
-                        if (signInMethods != null && signInMethods.isNotEmpty()) {
-                            // Email is registered, proceed with sending password reset email
-                            firebaseAuth.sendPasswordResetEmail(email)
-                                .addOnCompleteListener { passwordResetTask ->
-                                    if (passwordResetTask.isSuccessful) {
-                                        Toast.makeText(this, "Password reset email sent successfully", Toast.LENGTH_SHORT).show()
-                                    } else {
-                                        Toast.makeText(this, "Password reset email failed to send", Toast.LENGTH_SHORT).show()
-                                    }
+            val usersRef = firebaseDatabase.reference.child("users")
+            val serviceManRef = firebaseDatabase.reference.child("serviceMan")
+
+            // First, check in the "users" collection
+            usersRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(usersSnapshot: DataSnapshot) {
+                    if (usersSnapshot.exists()) {
+                        // Email is registered in "users" collection, proceed with sending password reset email
+                        firebaseAuth.sendPasswordResetEmail(email)
+                            .addOnCompleteListener { passwordResetTask ->
+                                if (passwordResetTask.isSuccessful) {
+                                    Toast.makeText(this@LoginActivity, "Password reset email sent successfully", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(this@LoginActivity, "Password reset email failed to send", Toast.LENGTH_SHORT).show()
                                 }
-                        } else {
-                            // Email is not registered
-                            Snackbar.make(
-                                findViewById(android.R.id.content),
-                                "Email is not registered",
-                                Snackbar.LENGTH_LONG
-                            ).show()
-                        }
+                            }
                     } else {
-                        // Error occurred while checking email registration
-                        Snackbar.make(
-                            findViewById(android.R.id.content),
-                            "Error occurred while checking email registration",
-                            Snackbar.LENGTH_LONG
-                        ).show()
+                        // Email not found in "users" collection, check in "serviceMan" collection
+                        serviceManRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(serviceManSnapshot: DataSnapshot) {
+                                if (serviceManSnapshot.exists()) {
+                                    // Email is registered in "serviceMan" collection, proceed with sending password reset email
+                                    firebaseAuth.sendPasswordResetEmail(email)
+                                        .addOnCompleteListener { passwordResetTask ->
+                                            if (passwordResetTask.isSuccessful) {
+                                                Toast.makeText(this@LoginActivity, "Password reset email sent successfully", Toast.LENGTH_SHORT).show()
+                                            } else {
+                                                Toast.makeText(this@LoginActivity, "Password reset email failed to send", Toast.LENGTH_SHORT).show()
+                                            }
+                                        }
+                                } else {
+                                    // Email is not registered in either "users" or "serviceMan" collection
+                                    Snackbar.make(
+                                        findViewById(android.R.id.content),
+                                        "Email is not registered",
+                                        Snackbar.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
+
+                            override fun onCancelled(serviceManError: DatabaseError) {
+                                // Error occurred while checking email registration in "serviceMan" collection
+                                Snackbar.make(
+                                    findViewById(android.R.id.content),
+                                    "Error occurred while checking email registration",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            }
+                        })
                     }
                 }
+
+                override fun onCancelled(usersError: DatabaseError) {
+                    // Error occurred while checking email registration in "users" collection
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Error occurred while checking email registration",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            })
         }
-    
-    
+
+
+
         private fun validateEmail(email: String): Boolean {
             return Patterns.EMAIL_ADDRESS.matcher(email).matches()
         }

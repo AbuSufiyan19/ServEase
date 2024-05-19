@@ -29,6 +29,18 @@
     </RelativeLayout>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/nobookings"
+        android:layout_height="wrap_content"
+        android:text="No Bookings yet now"
+        android:textSize="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:textColor="@color/grey2"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+    </TextView>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@color/grey1"
